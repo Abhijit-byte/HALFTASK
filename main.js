@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailLabel = document.getElementById('email-label');
   const emailError = document.getElementById('email-error');
   const submitBtn = document.getElementById('submit-btn');
-  const btnText = submitBtn.querySelector('.btn-text');
-  const btnLoader = submitBtn.querySelector('.btn-loader');
+  const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+  const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
   
   // Custom Toast Notification System
   function showToast(message, type = 'info') {
@@ -78,60 +78,84 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Clear validation styles when user edits input
-  emailInput.addEventListener('input', () => {
-    const parent = emailInput.closest('.form-group');
-    parent.classList.remove('invalid');
-    emailError.classList.remove('visible');
-    emailError.textContent = '';
+  document.querySelectorAll('.form-group input, .form-group-checkbox input').forEach(input => {
+    input.addEventListener('input', () => {
+      const parent = input.closest('.form-group') || input.closest('.form-group-checkbox');
+      if (parent) {
+        parent.classList.remove('invalid');
+        const errorEl = parent.querySelector('.error-msg');
+        if (errorEl) {
+          errorEl.classList.remove('visible');
+          errorEl.textContent = '';
+        }
+      }
+    });
+    if (input.type === 'checkbox') {
+      input.addEventListener('change', () => {
+        const parent = input.closest('.form-group') || input.closest('.form-group-checkbox');
+        if (parent) {
+          parent.classList.remove('invalid');
+          const errorEl = parent.querySelector('.error-msg');
+          if (errorEl) {
+            errorEl.classList.remove('visible');
+            errorEl.textContent = '';
+          }
+        }
+      });
+    }
   });
 
-  // Handle Form Submission
-  loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const emailVal = emailInput.value.trim();
-    const parent = emailInput.closest('.form-group');
-
-    // Case 1: Empty input
-    if (!emailVal) {
-      parent.classList.add('invalid');
-      emailError.textContent = 'Email is required';
-      emailError.classList.add('visible');
-      emailInput.focus();
-      return;
-    }
-
-    // Case 2: Format mismatch
-    if (!validateEmail(emailVal)) {
-      parent.classList.add('invalid');
-      emailError.textContent = 'Enter a valid email address';
-      emailError.classList.add('visible');
-      emailInput.focus();
-      return;
-    }
-
-    // Success State: Trigger Button Loader Animation
-    submitBtn.disabled = true;
-    btnText.style.opacity = '0';
-    btnLoader.hidden = false;
-    
-    // Simulate authentication api request
-    setTimeout(() => {
-      // Revert states
-      submitBtn.disabled = false;
-      btnText.style.opacity = '1';
-      btnLoader.hidden = true;
+  // Handle Form Submission for Login
+  if (loginForm && emailInput && emailError && submitBtn) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
       
-      showToast(`Magic link sent to ${emailVal}!`, 'success');
-      emailInput.value = ''; // Reset input
-    }, 1800);
-  });
+      const emailVal = emailInput.value.trim();
+      const parent = emailInput.closest('.form-group');
+
+      // Case 1: Empty input
+      if (!emailVal) {
+        parent.classList.add('invalid');
+        emailError.textContent = 'Email is required';
+        emailError.classList.add('visible');
+        emailInput.focus();
+        return;
+      }
+
+      // Case 2: Format mismatch
+      if (!validateEmail(emailVal)) {
+        parent.classList.add('invalid');
+        emailError.textContent = 'Enter a valid email address';
+        emailError.classList.add('visible');
+        emailInput.focus();
+        return;
+      }
+
+      // Success State: Trigger Button Loader Animation
+      submitBtn.disabled = true;
+      if (btnText) btnText.style.opacity = '0';
+      if (btnLoader) btnLoader.hidden = false;
+      
+      // Simulate authentication api request
+      setTimeout(() => {
+        // Revert states
+        submitBtn.disabled = false;
+        if (btnText) btnText.style.opacity = '1';
+        if (btnLoader) btnLoader.hidden = true;
+        
+        showToast(`Magic link sent to ${emailVal}!`, 'success');
+        emailInput.value = ''; // Reset input
+      }, 1800);
+    });
+  }
 
   // Passkey Simulation Trigger
   const passkeyBtn = document.getElementById('passkey-btn');
-  passkeyBtn.addEventListener('click', () => {
-    showToast('Initializing secure passkey verification...', 'info');
-  });
+  if (passkeyBtn) {
+    passkeyBtn.addEventListener('click', () => {
+      showToast('Initializing secure passkey verification...', 'info');
+    });
+  }
 
   // Social Authentication Listeners
   const socialAuths = {
@@ -215,12 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Signup Trigger Toast
+  // Signup Trigger Redirect to signup page
   const signupTriggers = document.querySelectorAll('.signup-trigger, #header-signup-btn');
   signupTriggers.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      showToast('Registration is currently closed for the beta phase. Please log in using the email credentials!', 'info');
+      window.location.href = 'signup.html';
     });
   });
 
@@ -271,5 +295,202 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // --- Signup Page (signup.html) Logic ---
+  const signupForm = document.getElementById('signup-form');
+  const signupStep1 = document.getElementById('signup-step-1');
+  const signupStep2 = document.getElementById('signup-step-2');
+  
+  if (signupStep1 && signupStep2) {
+    const takerCard = document.getElementById('role-taker');
+    const providerCard = document.getElementById('role-provider');
+    const btnNextStep = document.getElementById('btn-next-step');
+    const btnBackStep = document.getElementById('btn-back-step');
+    const signupHeading = document.getElementById('signup-heading');
+    const signupSubheading = document.getElementById('signup-subheading');
+    let selectedRole = null;
+
+    // Card Selection
+    const selectRole = (role) => {
+      selectedRole = role;
+      if (role === 'taker') {
+        takerCard.classList.add('selected');
+        takerCard.setAttribute('aria-checked', 'true');
+        providerCard.classList.remove('selected');
+        providerCard.setAttribute('aria-checked', 'false');
+        btnNextStep.disabled = false;
+        btnNextStep.textContent = 'Join as a Service Taker';
+      } else {
+        providerCard.classList.add('selected');
+        providerCard.setAttribute('aria-checked', 'true');
+        takerCard.classList.remove('selected');
+        takerCard.setAttribute('aria-checked', 'false');
+        btnNextStep.disabled = false;
+        btnNextStep.textContent = 'Apply as a Service Provider';
+      }
+    };
+
+    if (takerCard) takerCard.addEventListener('click', () => selectRole('taker'));
+    if (providerCard) providerCard.addEventListener('click', () => selectRole('provider'));
+
+    // Handle keyboards for accessibility
+    [takerCard, providerCard].forEach(card => {
+      if (card) {
+        card.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            selectRole(card.dataset.role);
+          }
+        });
+      }
+    });
+
+    // Proceed to Step 2
+    const proceedToStep2 = () => {
+      if (!selectedRole) return;
+      
+      // Update heading details based on role
+      if (selectedRole === 'taker') {
+        signupHeading.textContent = 'Sign up to hire elite talent';
+        signupSubheading.textContent = 'Create your Service Taker account';
+      } else {
+        signupHeading.textContent = 'Sign up to find work';
+        signupSubheading.textContent = 'Create your Service Provider account';
+      }
+
+      // Transition
+      signupStep1.classList.remove('active');
+      signupStep2.classList.add('active');
+    };
+
+    if (btnNextStep) {
+      btnNextStep.addEventListener('click', proceedToStep2);
+    }
+
+    // Double click to proceed directly
+    if (takerCard) takerCard.addEventListener('dblclick', proceedToStep2);
+    if (providerCard) providerCard.addEventListener('dblclick', proceedToStep2);
+
+    // Go back to Step 1
+    if (btnBackStep) {
+      btnBackStep.addEventListener('click', () => {
+        signupStep2.classList.remove('active');
+        signupStep1.classList.add('active');
+      });
+    }
+
+    // Check if role is pre-selected via query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const roleParam = urlParams.get('role');
+    if (roleParam === 'taker' || roleParam === 'provider') {
+      selectRole(roleParam);
+      proceedToStep2();
+    }
+
+    // Password visibility toggle
+    const btnTogglePassword = document.getElementById('btn-toggle-password');
+    const passwordInput = document.getElementById('password');
+    if (btnTogglePassword && passwordInput) {
+      btnTogglePassword.addEventListener('click', () => {
+        const eyeOff = btnTogglePassword.querySelector('.eye-off');
+        const eyeOn = btnTogglePassword.querySelector('.eye-on');
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          if (eyeOff) eyeOff.style.display = 'none';
+          if (eyeOn) eyeOn.style.display = 'block';
+          btnTogglePassword.setAttribute('aria-label', 'Hide password');
+        } else {
+          passwordInput.type = 'password';
+          if (eyeOff) eyeOff.style.display = 'block';
+          if (eyeOn) eyeOn.style.display = 'none';
+          btnTogglePassword.setAttribute('aria-label', 'Show password');
+        }
+      });
+    }
+
+    // Sign up form submission
+    if (signupForm) {
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const firstName = document.getElementById('first-name');
+        const lastName = document.getElementById('last-name');
+        const email = document.getElementById('email');
+        const password = passwordInput;
+        const terms = document.getElementById('agree-terms');
+
+        let isValid = true;
+
+        const showError = (input, msg) => {
+          const parent = input.closest('.form-group') || input.closest('.form-group-checkbox');
+          if (parent) {
+            parent.classList.add('invalid');
+            const errEl = parent.querySelector('.error-msg');
+            if (errEl) {
+              errEl.textContent = msg;
+              errEl.classList.add('visible');
+            }
+          }
+          isValid = false;
+        };
+
+        // Reset errors
+        document.querySelectorAll('.signup-step .form-group, .signup-step .form-group-checkbox').forEach(el => {
+          el.classList.remove('invalid');
+          const errEl = el.querySelector('.error-msg');
+          if (errEl) {
+            errEl.classList.remove('visible');
+            errEl.textContent = '';
+          }
+        });
+
+        // Validations
+        if (!firstName.value.trim()) {
+          showError(firstName, 'First name is required');
+        }
+        if (!lastName.value.trim()) {
+          showError(lastName, 'Last name is required');
+        }
+        if (!email.value.trim()) {
+          showError(email, 'Email is required');
+        } else if (!validateEmail(email.value)) {
+          showError(email, 'Enter a valid email address');
+        }
+        if (!password.value) {
+          showError(password, 'Password is required');
+        } else if (password.value.length < 8) {
+          showError(password, 'Password must be at least 8 characters');
+        }
+        if (!terms.checked) {
+          showError(terms, 'You must agree to the Terms and Privacy Policy');
+        }
+
+        if (!isValid) return;
+
+        // Show spinner
+        const submitBtnSignup = signupForm.querySelector('#submit-btn');
+        const btnTextSignup = submitBtnSignup ? submitBtnSignup.querySelector('.btn-text') : null;
+        const btnLoaderSignup = submitBtnSignup ? submitBtnSignup.querySelector('.btn-loader') : null;
+
+        if (submitBtnSignup) submitBtnSignup.disabled = true;
+        if (btnTextSignup) btnTextSignup.style.opacity = '0';
+        if (btnLoaderSignup) btnLoaderSignup.hidden = false;
+
+        setTimeout(() => {
+          if (submitBtnSignup) submitBtnSignup.disabled = false;
+          if (btnTextSignup) btnTextSignup.style.opacity = '1';
+          if (btnLoaderSignup) btnLoaderSignup.hidden = true;
+
+          showToast(`Account successfully created as a ${selectedRole === 'taker' ? 'Service Taker' : 'Service Provider'}!`, 'success');
+          signupForm.reset();
+
+          // Redirect to login or index after a short delay
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 2000);
+        }, 1800);
+      });
+    }
+  }
 });
 

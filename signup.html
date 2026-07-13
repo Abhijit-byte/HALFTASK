@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up - Halftask</title>
+  <meta name="description" content="Sign up for a Halftask account. Hire top experts or find freelance work instantly. Velocity through Simplicity.">
+  <!-- Google Fonts: Plus Jakarta Sans for headers, Inter for body UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="signup-page">
+  <div class="glow-bg"></div>
+  
+  <main class="login-wrapper">
+    <!-- Halftask Brand Logo Header -->
+    <header class="brand-header">
+      <div class="logo-container">
+        <a href="index.html" class="logo-link-wrapper" style="display: flex; align-items: center; gap: 16px; text-decoration: none;">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 52px; height: 52px;">
+            <defs>
+              <linearGradient id="halftask-grad-1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00bcd4" /> <!-- Teal/Cyan -->
+                <stop offset="50%" stop-color="#0097a7" /> <!-- Darker Teal -->
+                <stop offset="100%" stop-color="#0d47a1" /> <!-- Deep Blue -->
+              </linearGradient>
+              <linearGradient id="halftask-grad-2" x1="100" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00e5ff" /> <!-- Bright Cyan -->
+                <stop offset="100%" stop-color="#1565c0" /> <!-- Deep Blue -->
+              </linearGradient>
+            </defs>
+            <!-- Stylized H-shaped shield/pin logo structure -->
+            <path d="M50,92 C47.5,92 20,70.5 15,48 C12,34.5 17.5,19 32,12 C44,6.2 50,15 50,15 C50,15 56,6.2 68,12 C82.5,19 88,34.5 85,48 C80,70.5 52.5,92 50,92 Z" 
+                  stroke="url(#halftask-grad-1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M35,26 L35,66 M65,26 L65,66 M35,46 L65,46" 
+                  stroke="url(#halftask-grad-2)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div class="logo-text" style="text-align: left;">
+            <span class="brand-title">HALFTASK</span>
+            <span class="brand-tagline">Velocity through Simplicity</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Interactive Multistep Sign Up Card -->
+    <div class="login-card signup-card-container">
+      
+      <!-- STEP 1: Role Selection -->
+      <div id="signup-step-1" class="signup-step active">
+        <div class="card-header" style="text-align: center;">
+          <h2>Welcome to Halftask</h2>
+          <p class="card-subtitle">Which describes you best?</p>
+        </div>
+
+        <div class="role-grid">
+          <!-- Taker Card -->
+          <div class="role-card" id="role-taker" data-role="taker" tabindex="0" role="radio" aria-checked="false">
+            <div class="role-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+                <rect x="15" y="14" width="6" height="5" rx="1" />
+                <path d="M17 14v-2a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v2" />
+              </svg>
+            </div>
+            <div class="role-meta">
+              <span class="role-title">Service Taker <span class="role-arrow">&rarr;</span></span>
+              <span class="role-desc">Post jobs and hire experts</span>
+            </div>
+            <div class="role-checkmark">
+              <div class="checkmark-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Provider Card -->
+          <div class="role-card" id="role-provider" data-role="provider" tabindex="0" role="radio" aria-checked="false">
+            <div class="role-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+                <rect x="14" y="15" width="8" height="5" rx="1" />
+                <line x1="13" y1="20" x2="23" y2="20" />
+              </svg>
+            </div>
+            <div class="role-meta">
+              <span class="role-title">Service Provider <span class="role-arrow">&rarr;</span></span>
+              <span class="role-desc">Work and get paid securely</span>
+            </div>
+            <div class="role-checkmark">
+              <div class="checkmark-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="btn-next-step" class="btn btn-primary" style="margin-top: 28px;" disabled>
+          Create Account
+        </button>
+
+        <div class="signup-prompt" style="margin-top: 24px;">
+          <span>Already have an account?</span>
+          <a href="login.html" id="login-link" class="link">Log in</a>
+        </div>
+      </div>
+
+      <!-- STEP 2: Detailed Signup Form -->
+      <div id="signup-step-2" class="signup-step">
+        <button type="button" id="btn-back-step" class="btn-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </button>
+
+        <div class="card-header" style="margin-top: 16px;">
+          <h2 id="signup-heading">Sign up</h2>
+          <p class="card-subtitle" id="signup-subheading">Create your Halftask account</p>
+        </div>
+
+        <form id="signup-form" novalidate>
+          <div class="form-row-double">
+            <div class="form-group">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" name="first-name" required autocomplete="given-name" spellcheck="false">
+              <div class="error-msg" id="first-name-error" aria-live="polite"></div>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" name="last-name" required autocomplete="family-name" spellcheck="false">
+              <div class="error-msg" id="last-name-error" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" spellcheck="false">
+            <div class="error-msg" id="email-error" aria-live="polite"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="At least 8 characters">
+              <button type="button" class="btn-toggle-password" id="btn-toggle-password" aria-label="Toggle password visibility">
+                <svg class="eye-icon eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+                <svg class="eye-icon eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <div class="error-msg" id="password-error" aria-live="polite"></div>
+          </div>
+
+          <!-- Custom Terms Checkbox -->
+          <div class="form-group form-group-checkbox">
+            <label class="custom-checkbox-container" for="agree-terms">
+              <input type="checkbox" id="agree-terms" name="agree-terms" required>
+              <span class="custom-checkmark"></span>
+              <span class="checkbox-label-text">
+                Yes, I understand and agree to the <a href="#" class="inline-link">Terms of Service</a> and <a href="#" class="inline-link">Privacy Policy</a>.
+              </span>
+            </label>
+            <div class="error-msg" id="terms-error" aria-live="polite"></div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary" style="margin-top: 10px;">
+            <span class="btn-text">Create my account</span>
+            <span class="btn-loader" hidden></span>
+          </button>
+        </form>
+
+        <div class="divider">
+          <span>or sign up with</span>
+        </div>
+
+        <!-- Social Logins Row -->
+        <div class="social-auth-row" aria-label="Alternative registration methods">
+          <!-- Google -->
+          <button type="button" class="social-btn" id="google-btn" aria-label="Sign up with Google">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </button>
+
+          <!-- Apple -->
+          <button type="button" class="social-btn" id="apple-btn" aria-label="Sign up with Apple">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.58 2.95-1.39z"/>
+            </svg>
+          </button>
+
+          <!-- Facebook -->
+          <button type="button" class="social-btn" id="facebook-btn" aria-label="Sign up with Facebook">
+            <svg viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </button>
+
+          <!-- WhatsApp -->
+          <button type="button" class="social-btn" id="whatsapp-btn" aria-label="Sign up with WhatsApp">
+            <svg viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.012 0C5.398 0 .024 5.399.024 12.014c0 2.112.55 4.17 1.597 5.978L0 24l6.19-1.624c1.748.954 3.71 1.458 5.71 1.459h.005c6.613 0 11.986-5.397 11.986-12.014C23.89 5.4 18.625 0 12.012 0zm6.136 16.994c-.267.753-1.348 1.38-1.857 1.46-.46.073-.918.125-2.82-.626-2.427-.962-3.99-3.435-4.11-3.6-1.12-1.12-2.11-2.9-2.11-4.807 0-1.93.99-2.9 1.41-3.328.32-.326.68-.42.88-.42H10.1c.214 0 .498.02.723.518.25.56.85 2.07.923 2.224.076.155.12.336.02.535-.098.2-.15.31-.295.485-.145.176-.307.393-.438.528-.15.154-.306.323-.13.626.175.3.778 1.284 1.67 2.08.15.134.885.787 1.054.94.17.155.267.135.367.02.1-.115.42-.49.535-.658.115-.17.23-.135.393-.075.164.06.103.483 1.01.937.1.05.17.115.2.17.27.755.02 1.565-.264 1.947z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="signup-prompt" style="margin-top: 24px;">
+          <span>Already have an account?</span>
+          <a href="login.html" class="link">Log in</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Extra Links & Consent Disclaimer -->
+    <footer class="page-footer">
+      <a href="#" class="help-link" id="help-link">Need Help?</a>
+      <p class="disclaimer">
+        By continuing, you agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>, and to receive marketing emails from Halftask. Unsubscribe anytime.
+      </p>
+    </footer>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

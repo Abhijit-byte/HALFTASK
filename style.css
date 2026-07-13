@@ -1515,3 +1515,469 @@ body.home-page {
     font-size: 32px;
   }
 }
+
+/* ==========================================================================
+   Halftask Custom Signup Page CSS Styles
+   ========================================================================== */
+
+/* Change max width of wrapper for signup page to accommodate double role cards side-by-side */
+body.signup-page .login-wrapper {
+  max-width: 640px;
+  transition: max-width var(--transition-normal);
+}
+
+/* Container spacing override */
+.signup-card-container {
+  padding: 44px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Multistep screen transitions */
+.signup-step {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.signup-step.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Step 1: Role Selection CSS */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.role-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 30px 24px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: all var(--transition-normal);
+  outline: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.role-card:hover {
+  border-color: var(--text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07);
+}
+
+/* Selected state styling */
+.role-card.selected {
+  border-color: var(--primary-accent);
+  background-color: rgba(0, 128, 249, 0.02);
+  box-shadow: 0 12px 20px -8px rgba(0, 128, 249, 0.15);
+}
+
+.role-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: transform var(--transition-fast);
+}
+
+.role-card:hover .role-icon-box {
+  transform: scale(1.05);
+}
+
+.role-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.role-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.role-arrow {
+  transition: transform var(--transition-fast);
+  opacity: 0.7;
+}
+
+.role-card:hover .role-arrow {
+  transform: translateX(4px);
+}
+
+.role-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Checkmark indicator styling */
+.role-checkmark {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.checkmark-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.checkmark-circle svg {
+  width: 12px;
+  height: 12px;
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all var(--transition-fast);
+}
+
+.role-card.selected .checkmark-circle {
+  background-color: var(--primary-accent);
+  border-color: var(--primary-accent);
+}
+
+.role-card.selected .checkmark-circle svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Step 2 Form CSS */
+.btn-back {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn-back:hover {
+  color: var(--text-primary);
+  background-color: var(--btn-light);
+}
+
+.btn-back svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.btn-back:hover svg {
+  transform: translateX(-2px);
+}
+
+/* Double columns for fields */
+.form-row-double {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Password Toggle Wrapper */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  padding-right: 48px;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color var(--transition-fast);
+  outline: none;
+}
+
+.btn-toggle-password:hover {
+  color: var(--text-primary);
+}
+
+.btn-toggle-password svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Custom Checkbox Design */
+.form-group-checkbox {
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.custom-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.custom-checkbox-container input {
+  display: none;
+}
+
+.custom-checkmark {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  background-color: #ffffff;
+  flex-shrink: 0;
+  position: relative;
+  margin-top: 2px;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.custom-checkbox-container:hover input ~ .custom-checkmark {
+  border-color: var(--text-light);
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkmark {
+  background-color: var(--primary-accent);
+  border-color: var(--primary-accent);
+}
+
+.custom-checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkmark::after {
+  display: block;
+}
+
+.inline-link {
+  color: var(--primary-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile responsive modifications for signup */
+@media (max-width: 600px) {
+  body.signup-page .login-wrapper {
+    max-width: 100%;
+  }
+
+  .signup-card-container {
+    padding: 32px 24px;
+  }
+
+  .role-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .form-row-double {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* ==========================================================================
+   Halftask Service Taker & Service Provider Home Section Styles
+   ========================================================================== */
+
+.roles-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.role-section-card {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 48px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.role-section-card:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.role-section-card.taker-theme:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.08);
+}
+
+.role-section-card.provider-theme:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08);
+}
+
+.role-section-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.role-section-desc {
+  color: var(--text-light);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  min-height: 48px;
+}
+
+.role-bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 36px;
+  width: 100%;
+}
+
+.role-bullet-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.role-bullet-list li strong {
+  color: #ffffff;
+}
+
+.bullet-check {
+  color: var(--brand-cyan);
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.role-section-card.provider-theme .bullet-check {
+  color: #2563eb;
+}
+
+.btn-role-cta {
+  width: 100%;
+  margin-top: auto;
+  height: 48px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-role-cta.taker-btn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.btn-role-cta.taker-btn:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+.btn-role-cta.provider-btn {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.btn-role-cta.provider-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .roles-section-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .role-section-card {
+    padding: 36px 28px;
+  }
+}
+
+
