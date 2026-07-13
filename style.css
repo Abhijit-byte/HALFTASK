@@ -634,7 +634,22 @@ body.home-page {
 
 .mobile-toggle {
   display: none;
+  background: transparent;
+  border: none;
   color: #ffffff;
+  cursor: pointer;
+  padding: 4px;
+  outline: none;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-toggle svg {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 /* Mobile Drawer */
@@ -1487,7 +1502,7 @@ body.home-page {
   }
   
   .mobile-toggle {
-    display: block;
+    display: flex;
   }
   
   .hero-heading {
