@@ -361,6 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Transition
       signupStep1.classList.remove('active');
       signupStep2.classList.add('active');
+      const card = document.querySelector('.signup-card-container');
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     };
 
     if (btnNextStep) {
@@ -376,6 +380,10 @@ document.addEventListener('DOMContentLoaded', () => {
       btnBackStep.addEventListener('click', () => {
         signupStep2.classList.remove('active');
         signupStep1.classList.add('active');
+        const card = document.querySelector('.signup-card-container');
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     }
 

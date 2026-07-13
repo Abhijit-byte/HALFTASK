@@ -80,6 +80,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto; /* Graceful vertical and horizontal centering helper that prevents clipping */
 }
 
 /* Brand Header Area (Horizontal Logo Layout) */
@@ -462,6 +463,14 @@ body {
   .login-card {
     padding: 28px 20px 24px 20px;
     border-radius: 20px;
+  }
+  
+  .signup-card-container {
+    padding: 24px 16px;
+  }
+  
+  .role-card {
+    padding: 20px 16px;
   }
   
   .social-auth-row {
