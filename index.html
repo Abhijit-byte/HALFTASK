@@ -43,36 +43,7 @@
       100% { transform: translateY(0); opacity: 1; }
     }
 
-    /* Logo Hover Dropdown Styles */
-    .logo-hover-container {
-      position: relative;
-    }
-    .logo-dropdown {
-      position: absolute;
-      left: 0;
-      margin-top: 8px;
-      width: 192px; /* w-48 */
-      background-color: #ffffff !important;
-      border: 1px solid rgba(45, 64, 54, 0.12) !important;
-      border-radius: 16px !important; /* rounded-2xl */
-      padding: 8px !important; /* p-2 */
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important; /* shadow-xl */
-      opacity: 0 !important;
-      pointer-events: none !important;
-      transform: translateY(8px) !important;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      z-index: 9999 !important;
-    }
-    .logo-hover-container:hover .logo-dropdown {
-      opacity: 1 !important;
-      pointer-events: auto !important;
-      transform: translateY(0) !important;
-    }
-    .logo-hover-container:hover img {
-      opacity: 1 !important;
-      filter: brightness(1.1) !important;
-      transform: scale(1.02);
-    }
+
 
     /* CSS transitions for expandable search */
     .header-search-container.expanded .header-search-expandable {
@@ -107,6 +78,41 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <style>
+    /* Logo Hover Dropdown Styles */
+    .logo-hover-container {
+      position: relative !important;
+    }
+    .logo-dropdown {
+      position: absolute !important;
+      left: 0 !important;
+      margin-top: 8px !important;
+      width: 192px !important;
+      background-color: #ffffff !important;
+      border: 1px solid rgba(45, 64, 54, 0.12) !important;
+      border-radius: 16px !important;
+      padding: 8px !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(8px) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      z-index: 9999 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+    }
+    .logo-hover-container:hover .logo-dropdown {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: translateY(0) !important;
+    }
+    .logo-hover-container:hover img {
+      opacity: 1 !important;
+      filter: brightness(1.1) !important;
+      transform: scale(1.02) !important;
     }
   </style>
 </head>
