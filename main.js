@@ -257,12 +257,31 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast(`Searching for expert providers in "${query}"...`, 'info');
   };
 
+  const headerSearchBtnToggle = document.getElementById('header-search-btn-toggle');
+  const headerSearchContainer = document.querySelector('.header-search-container');
   const headerSearchInput = document.getElementById('search-input-header');
-  if (headerSearchInput) {
+
+  if (headerSearchBtnToggle && headerSearchContainer && headerSearchInput) {
+    headerSearchBtnToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = headerSearchContainer.classList.toggle('expanded');
+      if (isExpanded) {
+        headerSearchInput.focus();
+      }
+    });
+
+    // Close header search if clicked outside
+    document.addEventListener('click', (e) => {
+      if (!headerSearchContainer.contains(e.target)) {
+        headerSearchContainer.classList.remove('expanded');
+      }
+    });
+
     headerSearchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         triggerSearch(headerSearchInput.value);
         headerSearchInput.value = '';
+        headerSearchContainer.classList.remove('expanded');
       }
     });
   }

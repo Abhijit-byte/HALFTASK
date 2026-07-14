@@ -9,27 +9,53 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-sage-green: #95ada2;
+      --color-sage-green-dark: #708a7d;
+      --color-sage-green-deep: #2d4036;
+      --color-sage-green-light: #b5c8be;
+      --color-cream-bg: #f4f3ef;
+      --color-charcoal: #1b1e1c;
+      --color-border-color: #d2d7d4;
+      --color-border-focus: #6c8579;
+      --color-error-color: #c83232;
+      --color-btn-dark: #1b1e1c;
+      --color-btn-dark-hover: #080909;
+      --color-btn-light: #e4e7e4;
+      --color-btn-light-hover: #d2d6d2;
+      
+      --animate-slide-up-fade: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideUpFade {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
-<body>
-  <div class="glow-bg"></div>
+<<body class="bg-cream-bg font-sans min-h-screen relative flex items-center justify-center p-0 m-0 overflow-x-hidden selection:bg-sage-green selection:text-charcoal">
+  <!-- Ambient Radial Glow Background -->
+  <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-screen bg-[radial-gradient(circle_at_50%_50%,rgba(149,173,162,0.22)_0%,rgba(149,173,162,0.05)_50%,transparent_80%)] pointer-events-none z-0"></div>
   
-  <main class="login-wrapper">
+  <main class="relative z-10 w-full max-w-[480px] px-6 py-10 flex flex-col items-center mx-auto">
     <!-- Halftask Brand Logo Header -->
-    <header class="brand-header">
-      <div class="logo-container">
+    <header class="mb-8 w-full">
+      <div class="flex items-center justify-center gap-4">
         <!-- High-fidelity custom SVG of the Halftask Logo Icon -->
-        <a href="index.html" class="logo-link-wrapper" style="display: flex; align-items: center; gap: 16px; text-decoration: none;">
-          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width: 52px; height: 52px;">
+        <a href="index.html" class="flex items-center gap-4 no-underline" style="text-decoration: none;">
+          <svg class="w-[52px] h-[52px] shrink-0 drop-shadow-[0_4px_10px_rgba(149,173,162,0.25)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <linearGradient id="halftask-grad-1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#00bcd4" /> <!-- Teal/Cyan -->
-                <stop offset="50%" stop-color="#0097a7" /> <!-- Darker Teal -->
-                <stop offset="100%" stop-color="#0d47a1" /> <!-- Deep Blue -->
+                <stop offset="0%" stop-color="#95ada2" /> <!-- Sage -->
+                <stop offset="100%" stop-color="#2d4036" /> <!-- Deep Sage -->
               </linearGradient>
               <linearGradient id="halftask-grad-2" x1="100" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#00e5ff" /> <!-- Bright Cyan -->
-                <stop offset="100%" stop-color="#1565c0" /> <!-- Deep Blue -->
+                <stop offset="0%" stop-color="#b5c8be" /> <!-- Light Sage -->
+                <stop offset="100%" stop-color="#1b1e1c" /> <!-- Charcoal -->
               </linearGradient>
             </defs>
             <!-- Stylized H-shaped shield/pin logo structure -->
@@ -38,24 +64,24 @@
             <path d="M35,26 L35,66 M65,26 L65,66 M35,46 L65,46" 
                   stroke="url(#halftask-grad-2)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <div class="logo-text" style="text-align: left;">
-            <h1 class="brand-title">HALFTASK</h1>
-            <p class="brand-tagline">Velocity through Simplicity</p>
+          <div class="flex flex-col items-start text-left">
+            <h1 class="font-serif font-extrabold text-[26px] tracking-tight leading-none text-charcoal m-0">Halftask.</h1>
+            <p class="text-[11px] font-medium text-text-muted tracking-wider mt-0.5">Velocity through Simplicity</p>
           </div>
         </a>
       </div>
     </header>
 
     <!-- Shopify-style Login Card -->
-    <div class="login-card">
-      <div class="card-header">
-        <h2 id="login-heading">Log in</h2>
-        <p class="card-subtitle">Continue to Halftask</p>
+    <div class="bg-white rounded-[28px] w-full p-8 md:p-10 shadow-[0_24px_60px_rgba(45,64,54,0.08),0_0_1px_rgba(0,0,0,0.08)] border border-border-color translate-y-[10px] opacity-0 animate-slide-up-fade">
+      <div class="mb-7">
+        <h2 id="login-heading" class="text-[26px] font-bold text-charcoal tracking-tight">Log in</h2>
+        <p class="text-[14px] text-text-muted mt-1">Continue to Halftask</p>
       </div>
 
-      <form id="login-form" novalidate>
-        <div class="form-group">
-          <label for="email" id="email-label">Email</label>
+      <form id="login-form" class="w-full" novalidate>
+        <div class="mb-5 relative text-left">
+          <label for="email" id="email-label" class="block text-[13.5px] font-semibold text-charcoal mb-2">Email</label>
           <input 
             type="email" 
             id="email" 
@@ -63,23 +89,26 @@
             required 
             autocomplete="email"
             spellcheck="false"
+            class="w-full h-[50px] px-[18px] text-[15px] text-charcoal border border-border-color rounded-xl bg-transparent outline-none transition-all duration-200 focus:border-border-focus focus:ring-4 focus:ring-sage-green/20"
           >
-          <div class="error-msg" id="email-error" aria-live="polite"></div>
+          <div class="h-[18px] text-[12px] text-error-color mt-1.5 font-medium opacity-0 transition-opacity duration-200" id="email-error" aria-live="polite"></div>
         </div>
 
-        <button type="submit" id="submit-btn" class="btn btn-primary">
+        <button type="submit" id="submit-btn" class="inline-flex items-center justify-center w-full h-[50px] rounded-full text-[15px] font-semibold border-none cursor-pointer outline-none relative transition-all duration-200 active:scale-[0.985] bg-charcoal text-white hover:bg-[#080909] hover:shadow-lg">
           <span class="btn-text">Continue with email</span>
-          <span class="btn-loader" hidden></span>
+          <span class="w-5 h-5 border-2.5 border-white/20 border-t-white rounded-full animate-[spinner_0.6s_linear_infinite] absolute" hidden></span>
         </button>
       </form>
 
-      <div class="divider">
-        <span>or</span>
+      <div class="flex items-center justify-center my-6">
+        <span class="flex-1 h-[1px] bg-border-color opacity-70"></span>
+        <span class="px-4 text-[13px] text-text-muted font-medium lowercase">or</span>
+        <span class="flex-1 h-[1px] bg-border-color opacity-70"></span>
       </div>
 
       <!-- Passkey Sign-in Button -->
-      <button type="button" id="passkey-btn" class="btn btn-secondary">
-        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <button type="button" id="passkey-btn" class="inline-flex items-center justify-center w-full h-[50px] rounded-full text-[15px] font-semibold border-none cursor-pointer outline-none relative transition-all duration-200 active:scale-[0.985] bg-btn-light text-charcoal gap-2.5 hover:bg-btn-light-hover">
+        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M15 11C16.6569 11 18 9.65685 18 8C18 6.34315 16.6569 5 15 5C13.3431 5 12 6.34315 12 8C12 8.3582 12.0631 8.70138 12.1789 9.0195L7.20711 13.9913C7.01957 14.1788 6.91421 14.4332 6.91421 14.6984V17.0701C6.91421 17.5857 7.33235 18.0038 7.848 18.0038H9.0032C9.51885 18.0038 9.937 17.5857 9.937 17.0701V16.1472C9.937 15.882 10.0424 15.6277 10.2299 15.4401L10.755 14.915C10.9426 14.7275 11.1969 14.6221 11.4621 14.6221H12.385C12.9007 14.6221 13.3188 14.204 13.3188 13.6884V12.7655C13.3188 12.5003 13.4242 12.2459 13.6117 12.0584L14.9805 10.6896C14.987 10.7937 15 10.8967 15 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M15 8.00391H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -87,10 +116,10 @@
       </button>
 
       <!-- Social Logins Row -->
-      <div class="social-auth-row" aria-label="Alternative sign-in methods">
+      <div class="flex justify-center gap-4 my-5" aria-label="Alternative sign-in methods">
         <!-- Google -->
-        <button type="button" class="social-btn" id="google-btn" aria-label="Sign in with Google">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <button type="button" class="w-12 h-12 bg-btn-light hover:bg-btn-light-hover hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 rounded-full cursor-pointer flex items-center justify-center outline-none transition-all duration-200" id="google-btn" aria-label="Sign in with Google">
+          <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
@@ -99,39 +128,39 @@
         </button>
 
         <!-- Apple -->
-        <button type="button" class="social-btn" id="apple-btn" aria-label="Sign in with Apple">
-          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <button type="button" class="w-12 h-12 bg-btn-light hover:bg-btn-light-hover hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 rounded-full cursor-pointer flex items-center justify-center outline-none transition-all duration-200" id="apple-btn" aria-label="Sign in with Apple">
+          <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.58 2.95-1.39z"/>
           </svg>
         </button>
 
         <!-- Facebook -->
-        <button type="button" class="social-btn" id="facebook-btn" aria-label="Sign in with Facebook">
-          <svg viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+        <button type="button" class="w-12 h-12 bg-btn-light hover:bg-btn-light-hover hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 rounded-full cursor-pointer flex items-center justify-center outline-none transition-all duration-200" id="facebook-btn" aria-label="Sign in with Facebook">
+          <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
         </button>
 
         <!-- WhatsApp -->
-        <button type="button" class="social-btn" id="whatsapp-btn" aria-label="Sign in with WhatsApp">
-          <svg viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
+        <button type="button" class="w-12 h-12 bg-btn-light hover:bg-btn-light-hover hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 rounded-full cursor-pointer flex items-center justify-center outline-none transition-all duration-200" id="whatsapp-btn" aria-label="Sign in with WhatsApp">
+          <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.012 0C5.398 0 .024 5.399.024 12.014c0 2.112.55 4.17 1.597 5.978L0 24l6.19-1.624c1.748.954 3.71 1.458 5.71 1.459h.005c6.613 0 11.986-5.397 11.986-12.014C23.89 5.4 18.625 0 12.012 0zm6.136 16.994c-.267.753-1.348 1.38-1.857 1.46-.46.073-.918.125-2.82-.626-2.427-.962-3.99-3.435-4.11-3.6-1.12-1.12-2.11-2.9-2.11-4.807 0-1.93.99-2.9 1.41-3.328.32-.326.68-.42.88-.42H10.1c.214 0 .498.02.723.518.25.56.85 2.07.923 2.224.076.155.12.336.02.535-.098.2-.15.31-.295.485-.145.176-.307.393-.438.528-.15.154-.306.323-.13.626.175.3.778 1.284 1.67 2.08.15.134.885.787 1.054.94.17.155.267.135.367.02.1-.115.42-.49.535-.658.115-.17.23-.135.393-.075.164.06.103.483 1.01.937.1.05.17.115.2.17.27.755.02 1.565-.264 1.947z"/>
           </svg>
         </button>
       </div>
 
       <!-- Footer Call to Action -->
-      <div class="signup-prompt">
+      <div class="flex justify-center items-center gap-1.5 text-[14px] text-text-muted font-medium">
         <span>New to Halftask?</span>
-        <a href="signup.html" id="signup-link" class="link">Get started <span class="arrow-icon" aria-hidden="true">&rarr;</span></a>
+        <a href="signup.html" id="signup-link" class="group text-border-focus no-underline font-semibold inline-flex items-center gap-1 transition-colors duration-200 hover:text-sage-green-deep hover:underline">Get started <span class="inline-block transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
 
     <!-- Extra Links & Consent Disclaimer -->
-    <footer class="page-footer">
-      <a href="#" class="help-link" id="help-link">Need Help?</a>
-      <p class="disclaimer">
-        By continuing, you agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>, and to receive marketing emails from Halftask. Unsubscribe anytime.
+    <footer class="mt-10 w-full text-center flex flex-col gap-3">
+      <a href="#" class="text-[13px] font-semibold text-text-muted hover:text-charcoal no-underline transition-colors duration-200" id="help-link">Need Help?</a>
+      <p class="text-[11px] text-text-light leading-relaxed max-w-[400px] mx-auto">
+        By continuing, you agree to the <a href="#" class="text-text-muted hover:text-charcoal no-underline hover:underline transition-colors duration-200">Terms</a> and <a href="#" class="text-text-muted hover:text-charcoal no-underline hover:underline transition-colors duration-200">Privacy Policy</a>, and to receive marketing emails from Halftask. Unsubscribe anytime.
       </p>
     </footer>
   </main>
