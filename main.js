@@ -180,6 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
     signupLink.addEventListener('click', (e) => {
       e.preventDefault();
       showToast('Loading registration page...', 'info');
+      setTimeout(() => {
+        window.location.href = 'signup.html';
+      }, 500);
     });
   }
 
